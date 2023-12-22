@@ -1,0 +1,47 @@
+<div class="mt-3 mx-4 lg:mx-48">
+  <div>
+    <h1 class="text-center text-bold text-xl lg:text-3xl">Appointment Maker</h1>
+    <form [formGroup]="inputForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col">
+        <input
+          id="title"
+          formControlName="title"
+          type="text"
+          placeholder="Enter appointment description"
+          class="border mt-3 p-2 rounded-md"
+        />
+        <input
+          id="date"
+          formControlName="date"
+          type="date"
+          placeholder="Enter appointment Date"
+          class="border mt-3 p-2 rounded-md"
+        />
+      </div>
+      <button
+        type="submit"
+        [disabled]="!inputForm"
+        class="py-2 mt-3 bg-blue-400 w-full text-white font-bold"
+      >
+        Add
+      </button>
+    </form>
+  </div>
+  <ul class="mt-12">
+    <h2 class="text-center text-xl lg:text-3xl">Appointments</h2>
+    @for (appointment of appointments; track appointment.id) {
+    <li class="mt-4 mb-3 flex flex-row justify-between">
+      <span class="text-sm"> {{ appointment.title }} {{ appointment.date }} </span>
+      <button
+        (click)="deleteAppointment(appointment.id)"
+        class="bg-red-400 px-3 text-white rounded-md py-1"
+      >
+        Delete
+      </button>
+    </li>
+
+    } @empty {
+    <li>There are no items, try adding one</li>
+    }
+  </ul>
+</div>
